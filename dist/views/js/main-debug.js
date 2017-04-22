@@ -449,10 +449,25 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+
+    // -    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+    // -      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+    // -      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+    // -      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+
+    /* ^ Rather than calling querySelectorAll in a tight loop to recompute a
+    ** single width a bunch of times, recalculate the width once, and then set
+    ** the width in a loop so that style changes are batched:
+    */
+
+    var allRandomPizzas = document.querySelectorAll(".randomPizzaContainer");
+    var newWidth = 0;
+    if (allRandomPizzas.length >= 1) {
+      var dx = determineDx(allRandomPizzas[0], size);
+      var newWidth = (allRandomPizzas[0].offsetWidth + dx) + 'px';
+    }
+    for (var i = 0; i < allRandomPizzas.length; i++) {
+      allRandomPizzas[i].style.width = newWidth;
     }
   }
 
@@ -530,10 +545,12 @@ function updatePositions() {
   // Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
-  if (frame % 10 === 0) {
-    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-    logAverageFrame(timesToUpdatePosition);
-  }
+
+  // Don't slow down our scrolling with print statements
+  // if (frame % 10 === 0) {
+  //   var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+  //   logAverageFrame(timesToUpdatePosition);
+  // }
 }
 
 // runs updatePositions on scroll
