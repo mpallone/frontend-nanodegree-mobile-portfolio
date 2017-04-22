@@ -11,7 +11,7 @@ gulp.task('printDone', function() {
 });
 
 gulp.task('compressJs', function() {
-    gulp.src('src/**/*.js') // todo - test that this works on all JS files, in different locations
+    gulp.src('src/**/*.js')
         .pipe(minify({
             ext:{
                 src:'-debug.js',
@@ -22,7 +22,7 @@ gulp.task('compressJs', function() {
 });
 
 gulp.task('minify-css', function() {
-  return gulp.src('src/**/*.css') // todo - test that this works on all JS files, in different locations
+  return gulp.src('src/**/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('dist'));
 });
