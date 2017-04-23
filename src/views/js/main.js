@@ -480,7 +480,10 @@ var resizePizzas = function(size) {
          ** the width in a loop so that style changes are batched:
          */
 
-        var allRandomPizzas = document.querySelectorAll(".randomPizzaContainer");
+        // Recommended by code reviewer:
+        // var allRandomPizzas = document.querySelectorAll(".randomPizzaContainer");
+        var allRandomPizzas = document.getElementsByClassName("randomPizzaContainer");
+
         var newWidth = 0;
         if (allRandomPizzas.length >= 1) {
             var dx = determineDx(allRandomPizzas[0], size);
