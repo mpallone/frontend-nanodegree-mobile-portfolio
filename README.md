@@ -18,11 +18,13 @@ Simply point your browser at https://mpallone.github.io/frontend-nanodegree-mobi
 I use gulp to minify CSS and JS. Simply type `gulp watch`, and any file modifications in the src directory will cause JS and CSS minifiers to run. (This could be more efficient, but for this simple project, who cares.) 
 
 To install gulp: 
+
 `npm install gulp-cli -g`
 
 `npm install gulp -D`
 
 Once gulp is installed, type the following to install dependencies: 
+
 `npm install --save-dev gulp-watch`
 
 `npm install --save-dev gulp-minify`
