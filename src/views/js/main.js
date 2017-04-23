@@ -503,8 +503,10 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-    var pizzasDiv = document.getElementById("randomPizzas");
+    // it's wasteful to do this inside of the loop
+    // var pizzasDiv = document.getElementById("randomPizzas");
     pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -537,11 +539,12 @@ function updatePositions() {
     window.performance.mark("mark_start_frame");
 
     var items = document.querySelectorAll('.mover');
+    var scrollTop = document.body.scrollTop;
 
     var newLefts = [];
 
     for (var i = 0; i < items.length; i++) {
-        var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+        var phase = Math.sin((scrollTop / 1250) + (i % 5));
 
         /* This violates the JS before Style before Layout rule. Setting 'left'
          ** triggers layout, paint, and composite in a loop, hence the "jank".
