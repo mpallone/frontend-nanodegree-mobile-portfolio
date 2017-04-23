@@ -19,9 +19,12 @@ I use gulp to minify CSS and JS. Simply type `gulp watch`, and any file modifica
 
 To install gulp: 
 `npm install gulp-cli -g`
+
 `npm install gulp -D`
 
 Once gulp is installed, type the following to install dependencies: 
 `npm install --save-dev gulp-watch`
+
 `npm install --save-dev gulp-minify`
+
 `npm install gulp-clean-css --save-dev`
